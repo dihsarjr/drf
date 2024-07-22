@@ -1,17 +1,9 @@
 from django.http import JsonResponse
-import json
-import  pro
+from products.models import Product
 
 
 def api_home(request, *args, **kwargs):
-    body = request.body
-    print(body)
-    data = {}
-    try:
-        data = json.loads(body)
-    except:
-        pass
+    Product("title","content",100.00).save()
+    data = Product.objects.all().order_by().first
     print(data)
-    data['headers'] = dict(request.headers)
-    print(request.headers)
     return JsonResponse(data)
